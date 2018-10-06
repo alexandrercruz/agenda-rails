@@ -1,0 +1,8 @@
+"pt-BR":
+  messages:
+    confirm: Tem certeza?
+    listing: Lista de
+    errors: verifique os dados do formulário
+    created: Cadastro criado com sucesso
+    updated: Cadastro atualizado com sucesso
+    destroyed: Cadastro excluído com sucesso

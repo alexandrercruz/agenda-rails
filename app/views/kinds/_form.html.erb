@@ -1,0 +1,27 @@
+<br>
+<%= form_with(model: kind, local: true, html: { class: "basic-grey" }) do |form| %>
+  <% if kind.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= "#{pluralize(kind.errors.count, "erro")}, #{t('messages.errors')}" %>:</h2>
+
+      <ul>
+      <% kind.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+    <br>
+  <% end %>
+
+  <h1><%= t('formKind') %></h1>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit t('buttons.save'), class: "btn btn-success" %>
+    <%= link_to t('buttons.back'), kinds_path, class: "btn btn-default" %>
+  </div>
+<% end %>

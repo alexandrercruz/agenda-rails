@@ -1,0 +1,66 @@
+<br>
+<%= form_with(model: contact, local: true, html: { class: "basic-grey" }) do |form| %>
+  <% if contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= "#{pluralize(contact.errors.count, "erro")}, #{t('messages.errors')}" %>:</h2>
+
+      <ul>
+      <% contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+    <br>
+  <% end %>
+
+  <h1><%= t('formContact') %></h1>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :kind_id %>
+    <%= form.collection_select(:kind_id, @kind_options, :id, :description) %>
+  </div>
+
+  <%= form.fields_for :address do |address_fields| %>
+    <div class="field">
+      <%= address_fields.label :street %>
+      <%= address_fields.text_field :street %>
+    </div>
+    <div class="field">
+      <%= address_fields.label :city %>
+      <%= address_fields.text_field :city %>
+    </div>
+    <div class="field">
+      <%= address_fields.label :state %>
+      <%= address_fields.select :state, options_for_states(@contact.address.state) %>
+    </div>
+  <% end %>
+
+  <div id="phones">
+    <%= form.fields_for :phones do |phones_fields| %>
+      <%= render partial: "phone_fields", locals: { f: phones_fields } %>
+    <% end %>
+    <%= link_to_add_association('Adicionar Telefone', form, :phones, class: "btn btn-primary btn-xs") %>
+    <br>
+    <br>
+  </div>
+
+  <div class="field">
+    <%= form.label :rmk %>
+    <%= form.text_area :rmk %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit t('buttons.save'), class: "btn btn-success" %>
+    <%= link_to t('buttons.back'), contacts_path, class: "btn btn-default" %>
+  </div>
+<% end %>

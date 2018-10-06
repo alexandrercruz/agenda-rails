@@ -1,0 +1,9 @@
+<div class="nested-fields">
+    <div class="field">
+      <%= f.label :phone %>
+      <%= f.text_field :phone %>
+      <%= link_to_remove_association(f, class: "btn btn-danger btn-xs btn-circle") do %>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      <% end %>
+    </div>
+</div>
